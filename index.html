@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Shooting Game</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
+    <script type="text/javascript">
+       
+        var socket = io();
+       document.onkeydown = function(event) {
+         socket.emit('keypress', event.keyCode);   
+            }
+       socket.on('gameUpdate', function(gameInfo)){
+
+       }
+    </script>
+
+</body>
+</html>

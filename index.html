@@ -4,15 +4,52 @@
     <title>Shooting Game</title>
 </head>
 <body>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
     <script type="text/javascript">
-       
+      async function setup(){
+    //pixelDensity(4.7); //makes it high res
+    //fullScreen();
+     createCanvas(1000,1000);
+
+    background(50);
+}
+      var playerArrC = {};
+
         var socket = io();
        document.onkeydown = function(event) {
-         socket.emit('keypress', event.keyCode);   
+         socket.emit('keyPress', event.keyCode);   
             }
-       socket.on('gameUpdate', function(gameInfo)){
+       socket.on('gameUpdate', function(playerArr){
+            playerArrC = playerArr;
+            console.log("testasdasd");
 
+       });
+       async function draw(){
+         
+         //for(var i = 0; i<playerArrC.length; i++){ //look up how to get the keys in a list and then use that list to update keyz
+          Object.keys(playerArrC).forEach(function(playerId) {
+          console.log(playerArrC[playerId].direction);
+          switch(playerArrC[playerId].direction){
+             case "left":
+             playerArrC[playerId].posX--;
+            break;
+            case "down":
+            playerArrC[playerId].posY++;
+            break;
+            case "right":
+            playerArrC[playerId].posX++;
+           break;
+           case "up":
+           playerArrC[playerId].posY--;
+           break;
+            }
+            console.log(playerArrC[playerId].posX);
+          circle(playerArrC[playerId].posX,playerArrC[playerId].posY, 40);
+          
+           
+         });
        }
     </script>
 

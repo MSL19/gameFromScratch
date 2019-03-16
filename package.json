@@ -1,0 +1,24 @@
+{
+  "name": "gamefromscratch",
+  "version": "1.0.0",
+  "main": "p5.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MSL19/gameFromScratch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MSL19/gameFromScratch/issues"
+  },
+  "homepage": "https://github.com/MSL19/gameFromScratch#readme",
+  "dependencies": {
+    "socket.io": "^1.2.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}

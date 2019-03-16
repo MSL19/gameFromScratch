@@ -86,27 +86,39 @@ function getRandomInt(max) {
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
   });
-  
+
 io.on('connection', function(socket){
+  console.log("some kinds of connectio...");
   playerArr[socket.id] = new player(socket.id);
-    socket.on('keyPress', function(keyy){
-        switch (keyy) {
+    socket.on('keyPress', function(keyy, playerArrC){
+    
+      switch (keyy) {
             case 37:
-                 //alert('Left key pressed');
-                 updateDir(3);
+            console.log('Left key pressed');
+                 playerArr[socket.id].updateDir(3);
                break;
             case 38:
-                 //alert('Up key pressed');
-                updateDir(0);
+            console.log('Up key pressed');
+                 playerArr[socket.id].updateDir(0);
                break;
             case 39:
-                updateDir(2);
-                 //alert('Right key pressed');
+            playerArr[socket.id].updateDir(2);
+            console.log('Right key pressed');
                break;
             case 40:
-                updateDir(1);
-                 //alert('Down key pressed');
+            playerArr[socket.id].updateDir(1);
+                 console.log('Down key pressed');
                break;
          }
+         io.emit('gameUpdate', playerArr)
+
     });
+    socket.on("disconnect", function(){
+      delete player[socket.id];
+      io.emit("disconnect", socket.id);
+    });
+
+  });
+  http.listen(port, function(){
+    console.log('listening on *:' + port);
   });
